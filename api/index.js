@@ -14,6 +14,12 @@ const userRouter = require('../src/routes/user');
 
 const app = express();
 app.set("trust proxy",1);
+app.use(
+  cors({
+    origin: "http://localhost:3000", 
+    credentials: true,
+  })
+);
 
 if (config.isVercel) {
   app.use(async (req, res, next) => {
@@ -22,12 +28,7 @@ if (config.isVercel) {
   });
 }
 
-app.use(
-  cors({
-    origin: "http://localhost:3000", 
-    credentials: true,
-  })
-);
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
