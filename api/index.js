@@ -1,26 +1,20 @@
+require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const passport = require('passport');
 const passportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-require('dotenv').config();
+
 const config = require('../src/config');
 const PORT = config.port;
 const userRouter = require('../src/routes/user');
 
 const app = express();
 app.set("trust proxy",1);
-app.use(
-  cors({
-    origin: "http://localhost:3000", 
-    credentials: true,
-  })
-);
-
 if (config.isVercel) {
   app.use(async (req, res, next) => {
     await mongoose.connect(config.mongoUri, config.mongoOptions);
@@ -28,11 +22,21 @@ if (config.isVercel) {
   });
 }
 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(
+  cors({
+    origin: "https://therealityapp.netlify.app", 
+    credentials: true,
+  })
+);
+// app.use(
+//   cors({
+//     origin: '*',
+//     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   })
+// );
   app.use(
     session({
       secret: process.env.SESSION_SECRET,        
