@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require("connect-mongo");
 
-
-
 const config = require('../src/config');
 const PORT = config.port;
 const userRouter = require('../src/routes/user');
@@ -78,7 +76,5 @@ app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 require("../src/passports/passportConfig")(passport);
-
 app.use('/users', userRouter);
-
 module.exports = app;
