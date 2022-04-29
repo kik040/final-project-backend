@@ -5,7 +5,7 @@ const app = require('../api/index');
 const config = require('./config');
 const boot = async () => {
   // Connect to mongodb
-   console.log(`config.mongoUri=${config.mongoUri}config.mongoOptions${config.mongoOptions.user}`);
+   console.log(`config.mongoUri=${config.mongoUri} config.mongoOptions=${config.mongoOptions.user}`);
   await mongoose.connect(config.mongoUri, config.mongoOptions, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
