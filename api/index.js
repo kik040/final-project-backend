@@ -31,7 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "https://therealityapp.netlify.app", 
+    origin: "https://reality-final-project.vercel.app", 
+    // origin: "https://therealityapp.netlify.app", 
     credentials: true,
   })
 );
