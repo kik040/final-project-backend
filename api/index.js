@@ -11,8 +11,8 @@ const MongoStore = require("connect-mongo");
 
 
 
-const config = require('../src/config');
-const PORT = config.port;
+// const config = require('../src/config');
+// const PORT = config.port;
 const userRouter = require('../src/routes/user');
 
 const app = express();
