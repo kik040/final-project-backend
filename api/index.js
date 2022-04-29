@@ -7,6 +7,8 @@ const passport = require('passport');
 const passportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MongoStore = require("connect-mongo");
+
 
 
 const config = require('../src/config');
@@ -15,8 +17,10 @@ const userRouter = require('../src/routes/user');
 
 const app = express();
 app.set("trust proxy",1);
+
 if (config.isVercel) {
   app.use(async (req, res, next) => {
+    console.log(`commmmmmmm config.mongoUri=${config.mongoUri},config.mongoOptions=${config.mongoOptions}`);
     await mongoose.connect(config.mongoUri, config.mongoOptions);
     return next();
   });
